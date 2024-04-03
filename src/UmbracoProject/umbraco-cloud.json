@@ -1,7 +1,18 @@
 {
   "Deploy": {
     "Project": {
-      "Workspaces": []
+      "Name": "davids reserved cow",
+      "Alias": "davids-reserved-cow",
+      "Id": "88021cc1-a4e3-4a82-b5a8-8671548df882",
+      "TrialExpireDate": "2024-04-17T10:07:13.0000000",
+      "Workspaces": [
+        {
+          "Id": "44d7a449-c24f-46f8-9c6f-4603caa9e72b",
+          "Name": "Live",
+          "Type": "live",
+          "Url": "https://davids-reserved-cow.euwest01.umbraco.io"
+        }
+      ]
     },
     "Settings": {}
   },
