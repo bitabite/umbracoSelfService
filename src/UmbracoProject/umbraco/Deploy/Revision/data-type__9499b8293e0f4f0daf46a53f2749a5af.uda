@@ -1,0 +1,18 @@
+{
+  "Name": "[Slider] Spacing",
+  "Alias": "",
+  "EditorAlias": "Umbraco.Slider",
+  "DatabaseType": "Nvarchar",
+  "Configuration": {
+    "enableRange": false,
+    "initVal1": -1.0,
+    "initVal2": 0.0,
+    "minVal": -1.0,
+    "maxVal": 5.0,
+    "step": 1.0
+  },
+  "Udi": "umb://data-type/9499b8293e0f4f0daf46a53f2749a5af",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.1.0"
+}

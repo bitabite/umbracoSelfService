@@ -1,0 +1,14 @@
+{
+  "Name": "Error",
+  "Alias": "error",
+  "File": "umb://template-file/error.cshtml",
+  "Udi": "umb://template/c25c56ee7808462a9dc80258d091e1f4",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/error.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.1.0"
+}

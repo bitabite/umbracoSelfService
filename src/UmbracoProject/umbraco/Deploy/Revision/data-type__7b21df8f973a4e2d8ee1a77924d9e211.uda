@@ -1,0 +1,17 @@
+{
+  "Name": "[MediaPicker] SVG Image",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MediaPicker3",
+  "Configuration": {
+    "filter": "umbracoMediaVectorGraphics",
+    "multiple": false,
+    "validationLimit": {},
+    "enableLocalFocalPoint": false,
+    "crops": [],
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/7b21df8f973a4e2d8ee1a77924d9e211",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.1.0"
+}

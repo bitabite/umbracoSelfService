@@ -1,0 +1,31 @@
+{
+  "Name": "[MNTP] Authors",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MultiNodeTreePicker",
+  "Configuration": {
+    "startNode": {
+      "type": "content",
+      "dynamicRoot": {
+        "originAlias": "ByKey",
+        "originKey": "dcf18a51-6919-4cf8-89d1-36b94ce4d963",
+        "querySteps": [
+          {
+            "alias": "NearestDescendantOrSelf",
+            "anyOfDocTypeKeys": [
+              "b0287f57-fb53-4b80-9d0b-eb7c8b277a5a"
+            ]
+          }
+        ]
+      }
+    },
+    "filter": "author",
+    "minNumber": 0,
+    "maxNumber": 1,
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/bd37253b2f0540e08d386041c9456230",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.1.0"
+}

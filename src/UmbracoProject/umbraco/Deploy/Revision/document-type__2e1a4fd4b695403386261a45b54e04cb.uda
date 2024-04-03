@@ -1,0 +1,111 @@
+{
+  "Name": "Spacing Properties",
+  "Alias": "spacingProperties",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-defrag color-indigo",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/d2f0d572bff24dcebbdabe4ec937d30c",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "c809c885-c474-4a40-a273-57800fb7a374",
+      "Name": "Padding",
+      "SortOrder": 120,
+      "Type": 1,
+      "Alias": "padding",
+      "PropertyTypes": [
+        {
+          "Key": "0bc039b9-e31a-4bcc-b37e-5fb769bf697e",
+          "Alias": "marginBottom",
+          "DataType": "umb://data-type/a7590e7acad642e18ae9106c717206fd",
+          "MandatoryMessage": "",
+          "Name": "Margin Bottom",
+          "SortOrder": 30,
+          "ValidationMessage": ""
+        },
+        {
+          "Key": "1f5604f9-d578-4982-b7c8-17a0ece4e859",
+          "Alias": "marginTop",
+          "DataType": "umb://data-type/a7590e7acad642e18ae9106c717206fd",
+          "MandatoryMessage": "",
+          "Name": "Margin Top",
+          "SortOrder": 25,
+          "ValidationMessage": ""
+        },
+        {
+          "Key": "36211947-57e7-4488-9fe6-1e93ef0679fb",
+          "Alias": "paddingRight",
+          "DataType": "umb://data-type/a7590e7acad642e18ae9106c717206fd",
+          "MandatoryMessage": "",
+          "Name": "Padding Right",
+          "SortOrder": 20,
+          "ValidationMessage": ""
+        },
+        {
+          "Key": "74f3c3e7-9dff-4720-b7e7-70e3e83f97a8",
+          "Alias": "paddingBottom",
+          "DataType": "umb://data-type/a7590e7acad642e18ae9106c717206fd",
+          "MandatoryMessage": "",
+          "Name": "Padding Bottom",
+          "SortOrder": 10,
+          "ValidationMessage": ""
+        },
+        {
+          "Key": "7dfc3037-0b43-4f42-aad5-355d0ee7342f",
+          "Alias": "paddingLeft",
+          "DataType": "umb://data-type/a7590e7acad642e18ae9106c717206fd",
+          "MandatoryMessage": "",
+          "Name": "Padding Left",
+          "SortOrder": 15,
+          "ValidationMessage": ""
+        },
+        {
+          "Key": "98cc6dc6-caf8-4e87-af30-f8bfa3feb34d",
+          "Alias": "marginRight",
+          "DataType": "umb://data-type/a7590e7acad642e18ae9106c717206fd",
+          "MandatoryMessage": "",
+          "Name": "Margin Right",
+          "SortOrder": 40,
+          "ValidationMessage": ""
+        },
+        {
+          "Key": "dea3ad02-585a-4b7c-a3ca-d2b6dc6a3df5",
+          "Alias": "marginLeft",
+          "DataType": "umb://data-type/a7590e7acad642e18ae9106c717206fd",
+          "MandatoryMessage": "",
+          "Name": "Margin Left",
+          "SortOrder": 35,
+          "ValidationMessage": ""
+        },
+        {
+          "Key": "df09eca0-41f1-4a9c-b5bf-8e81ea99ed45",
+          "Alias": "paddingTop",
+          "DataType": "umb://data-type/a7590e7acad642e18ae9106c717206fd",
+          "MandatoryMessage": "",
+          "Name": "Padding Top",
+          "SortOrder": 5,
+          "ValidationMessage": ""
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/2e1a4fd4b695403386261a45b54e04cb",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/a7590e7acad642e18ae9106c717206fd",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/d2f0d572bff24dcebbdabe4ec937d30c",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.1.0"
+}

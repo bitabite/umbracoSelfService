@@ -1,0 +1,31 @@
+{
+  "Name": "[MNTP] Categories",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MultiNodeTreePicker",
+  "Configuration": {
+    "startNode": {
+      "type": "content",
+      "dynamicRoot": {
+        "originAlias": "ByKey",
+        "originKey": "dcf18a51-6919-4cf8-89d1-36b94ce4d963",
+        "querySteps": [
+          {
+            "alias": "NearestDescendantOrSelf",
+            "anyOfDocTypeKeys": [
+              "539869ea-4f0d-4c3b-80b1-aaa80a1c16e6"
+            ]
+          }
+        ]
+      }
+    },
+    "filter": "category",
+    "minNumber": 0,
+    "maxNumber": 0,
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/9a426393b2c84403a85f00b7a51ebe69",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.1.0"
+}
