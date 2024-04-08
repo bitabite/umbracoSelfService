@@ -1,0 +1,30 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@using Microsoft.AspNetCore.Http.Extensions
+@using Umbraco.Cms.Web.Common.Models
+@using Umbraco.Cms.Web.Website.Controllers
+@using Umbraco.Extensions
+
+@{
+    var isLoggedIn = Context.User?.Identity?.IsAuthenticated ?? false;
+    var logoutModel = new PostRedirectModel();
+    // You can modify this to redirect to a different URL instead of the current one
+    logoutModel.RedirectUrl = null;
+}
+
+@if (isLoggedIn)
+{
+    <div class="border-b border-black p-2 justify-end hidden lg:flex text-sm ">
+
+        <p>Welcome back <strong>@Context?.User?.Identity?.Name</strong>!</p>
+
+        @* Umbraco comes with a default controller in UmbLoginStatusController which can be used to logout. *@
+        @* However that version can only be used if you want to logout from the website only. *@
+        @* If you also want to logout at the external login provider a custom controller is needed. *@
+        @using (Html.BeginUmbracoForm<Umbraco_OpenIdConnect_Example.Core.Controllers.ExternalLogoutController>("HandleLogout", new { RedirectUrl = logoutModel.RedirectUrl }))
+        {
+            <button type="submit" class="button sm">Log out</button>
+        }
+
+    </div>
+}

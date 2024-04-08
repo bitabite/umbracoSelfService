@@ -1,29 +1,19 @@
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
-builder.CreateUmbracoBuilder()
-    .AddBackOffice()
-    .AddWebsite()
-    .AddDeliveryApi()
-    .AddComposers()
-    .Build();
-
-WebApplication app = builder.Build();
-
-await app.BootUmbracoAsync();
-
-app.UseHttpsRedirection();
-
-app.UseUmbraco()
-    .WithMiddleware(u =>
+namespace Umbraco_OpenIdConnect_Example.Web
+{
+    public class Program
     {
-        u.UseBackOffice();
-        u.UseWebsite();
-    })
-    .WithEndpoints(u =>
-    {
-        u.UseInstallerEndpoints();
-        u.UseBackOfficeEndpoints();
-        u.UseWebsiteEndpoints();
-    });
+        public static void Main(string[] args)
+            => CreateHostBuilder(args)
+                .Build()
+                .Run();
 
-await app.RunAsync();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureUmbracoDefaults()
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStaticWebAssets();
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+}

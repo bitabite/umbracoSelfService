@@ -1,0 +1,14 @@
+{
+  "Name": "Login",
+  "Alias": "Login",
+  "File": "umb://template-file/Login.cshtml",
+  "Udi": "umb://template/d4f0555a733241b28ae415e3a330fa94",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/Login.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.1.0"
+}

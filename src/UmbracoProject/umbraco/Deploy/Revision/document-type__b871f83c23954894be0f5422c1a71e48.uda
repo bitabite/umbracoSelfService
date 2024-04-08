@@ -3,7 +3,8 @@
   "Alias": "content",
   "DefaultTemplate": "umb://template/c604acfe4b214e4681f4b2b34d850fd1",
   "AllowedTemplates": [
-    "umb://template/c604acfe4b214e4681f4b2b34d850fd1"
+    "umb://template/c604acfe4b214e4681f4b2b34d850fd1",
+    "umb://template/d4f0555a733241b28ae415e3a330fa94"
   ],
   "HistoryCleanup": {},
   "Icon": "icon-document color-blue",
@@ -49,6 +50,10 @@
     },
     {
       "Udi": "umb://template/c604acfe4b214e4681f4b2b34d850fd1",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/d4f0555a733241b28ae415e3a330fa94",
       "Ordering": true
     }
   ],
