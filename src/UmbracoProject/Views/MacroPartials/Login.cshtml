@@ -21,7 +21,6 @@
 
 @if (ViewData.TryGetTwoFactorProviderNames(out var providerNames))
 {
-
     foreach (var providerName in providerNames)
     {
         <div class="2fa-form">
@@ -45,35 +44,58 @@ else
 {
 
 
+
 <div class="login-form">
+      
 
     @using (Html.BeginUmbracoForm<UmbLoginController>(
         "HandleLogin", new { RedirectUrl = loginModel.RedirectUrl })) {
-
             <h4>Log in with a local account.</h4>
             <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="mb-3">
-                <label asp-for="@loginModel.Username" class="form-label"></label>
-                <input asp-for="@loginModel.Username" class="form-control" />
-                <span asp-validation-for="@loginModel.Username" class="form-text text-danger"></span>
+            <div class="md:flex md:items-center mb-6">
+         
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="md:w-1/3">
+                        <label asp-for="@loginModel.Username" class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">Username</label>
+                    </div>
+                    <div class="md:w-2/3">
+                        <input asp-for="@loginModel.Username" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
+                        <span asp-validation-for="@loginModel.Username" class="form-text text-danger"></span>
+                </div>
             </div>
-            <div class="mb-3">
-                <label asp-for="@loginModel.Password" class="form-label"></label>
-                <input asp-for="@loginModel.Password" class="form-control" />
-                <span asp-validation-for="@loginModel.Password" class="form-text text-danger"></span>
+         
+            <div class="md:flex md:items-center mb-6">
+                <div class="md:w-1/3">
+                    <label asp-for="@loginModel.Password" class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"></label>
+                </div>
+                <div class="md:w-2/3">
+                    <input asp-for="@loginModel.Password" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
+                    <span asp-validation-for="@loginModel.Password" class="form-text text-danger"></span>
+                </div>
+        
             </div>
-            <div class="mb-3 form-check">
-                <input asp-for="@loginModel.RememberMe" class="form-check-input">
-                <label asp-for="@loginModel.RememberMe" class="form-check-label">
-                    @Html.DisplayNameFor(m => loginModel.RememberMe)
-                </label>
+            <div class="md:flex md:items-center mb-6">
+                <div class="md:w-1/3">
+               
+                </div>
+                <div class="md:w-2/3">
+                    <input asp-for="@loginModel.RememberMe" class="mr-2 leading-tight">
+                    <span class="text-sm">
+                    <label asp-for="@loginModel.RememberMe" class="md:w-2/3 block text-gray-500 font-bold">
+                        @Html.DisplayNameFor(m => loginModel.RememberMe)
+                    </label>
+                    </span>
+                </div>
             </div>
-
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3"></div>
+                <div class="md:w-2/3">
             <button type="submit" class="btn btn-primary">Log in</button>
-
-
+                </div>
+            </div>
+        
         }
+     
 @{
     var loginProviders = await memberExternalLoginProviders.GetMemberProvidersAsync();
     var externalSignInError = ViewData.GetExternalSignInProviderErrors();

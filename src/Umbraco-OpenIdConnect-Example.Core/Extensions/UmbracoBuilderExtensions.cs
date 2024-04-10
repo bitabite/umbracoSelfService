@@ -2,11 +2,14 @@
 {
     using System.Net;
     using System.Security.Claims;
+    using Microsoft.AspNetCore.Authentication;
     using Microsoft.Extensions.DependencyInjection;
     using Provider;
     using Umbraco.Cms.Core.DependencyInjection;
     using Umbraco.Cms.Core.Security;
+    using Umbraco.Cms.Web.Common.Security;
     using Umbraco.Extensions;
+    using Umbraco_OpenIdConnect_Example.Core.Member;
 
     public static class UmbracoBuilderExtensions
     {
@@ -26,11 +29,13 @@
                             {
                                 var config = builder.Config;
                                 options.ResponseType = "code";
-                                options.Scope.Add("openid");
-                                options.Scope.Add("profile");
-                                options.Scope.Add("email");
-                                options.Scope.Add("phone");
-                                options.Scope.Add("address");
+                                options.Scope.Clear(); //otherwise .NET adds profile scope, which we are not allowed to use.
+                                options.Scope.Add("openid mitid ssn privileges");
+
+                                //options.Scope.Add("profile");
+                                //options.Scope.Add("email");
+                                //options.Scope.Add("phone");
+                                //options.Scope.Add("address");
                                 options.RequireHttpsMetadata = true;
                                 options.MetadataAddress = config["OpenIdConnect:MetadataAddress"];
                                 options.ClientId = config["OpenIdConnect:ClientId"];
@@ -40,6 +45,21 @@
                                 options.ClientSecret = config["OpenIdConnect:ClientSecret"];
                                 options.SaveTokens = true;
                                 options.TokenValidationParameters.SaveSigninToken = true;
+                                options.ClaimActions.MapAll();
+
+                                options.GetClaimsFromUserInfoEndpoint = true;
+                                //
+                                options.ClaimActions.MapJsonKey("loa", "loa", "string");
+                                options.ClaimActions.MapJsonKey("dk.cpr", "dk.cpr", "string");
+                                options.ClaimActions.MapJsonKey("idp_identity_id", "idp_identity_id", "string");
+                                options.ClaimActions.MapJsonKey("idp_identity_id", "idp_identity_id", "string");
+                                options.ClaimActions.MapJsonKey("idp", "idp", "string");
+                                options.ClaimActions.MapJsonKey(ClaimTypes.Name, "mitid.identity_name", "string");
+                                options.Events.OnUserInformationReceived = (user) =>
+                                {
+                                    var claims = user.Principal.Claims.ToList();
+                                    return Task.CompletedTask;
+                                };
                                 options.Events.OnTokenValidated = async context =>
                                 {
                                     var claims = context?.Principal?.Claims.ToList();
@@ -66,7 +86,7 @@
                                             // The name claim is required for auto linking.
                                             // So get it from another claim and put it in the name claim.
                                             claims?.Add(new Claim(ClaimTypes.Name, name.Value));
-                                        }    
+                                        }
                                     }
 
                                     if (context != null)
@@ -81,6 +101,7 @@
                                 options.Events.OnRedirectToIdentityProviderForSignOut = async notification =>
                                 {
                                     var protocolMessage = notification.ProtocolMessage;
+                                    //https://broker.signaturgruppen.dk/application/files/8416/3610/7081/Nets_eID_Broker_Sessions_v.0.9.pdf
 
                                     var logoutUrl = config["OpenIdConnect:LogoutUrl"];
                                     var returnAfterLogout = config["OpenIdConnect:ReturnAfterLogout"];
@@ -100,7 +121,7 @@
                                     if (memberManager != null)
                                     {
                                         var currentMember = await memberManager.GetCurrentMemberAsync();
-                                        
+
                                         // On the current member we can find all their login tokens from the external login provider.
                                         // These tokens are stored in the umbracoExternalLoginToken table.
                                         var idToken = currentMember?.LoginTokens.FirstOrDefault(x => x.Name == "id_token");
@@ -119,6 +140,12 @@
             });
             return builder;
         }
-    }  
-}
 
+
+        public static IUmbracoBuilder AddCustomMemberSignInManager(this IUmbracoBuilder builder)
+        {
+            builder.Services.AddScoped<IMemberSignInManager, CustomMemberSignInManager>();
+            return builder;
+        }
+    }
+}

@@ -33,7 +33,7 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateUmbracoFormRouteString]
-        public async Task<IActionResult> HandleLogout([Bind(Prefix = "logoutModel")]PostRedirectModel model)
+        public async Task<IActionResult> HandleLogout([Bind(Prefix = "logoutModel")] PostRedirectModel model)
         {
             if (ModelState.IsValid == false)
             {
@@ -43,14 +43,20 @@
             var isLoggedIn = HttpContext.User?.Identity?.IsAuthenticated ?? false;
 
             if (isLoggedIn)
-            {   
+            {
                 // Trigger logout on the external login provider.
                 await this.HttpContext.SignOutAsync("UmbracoMembers.OpenIdConnect");
-                
+
                 // Trigger logout on this website.
                 await _signInManager.SignOutAsync();
+
+                var cookies = Request.Cookies;
+                foreach (var cookie in cookies)
+                {
+                    Response.Cookies.Delete(cookie.Key);
+                }
             }
-            
+
             // Don't return RedirectToCurrentUmbracoPage.
             // That will override the location header which is set by the external login provider logout.
             // So by returning EmptyResult() this will still redirect to the external login provider to logout there. 

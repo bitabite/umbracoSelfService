@@ -3,6 +3,7 @@ namespace Umbraco_OpenIdConnect_Example.Web
     using Core.Extensions;
     using Umbraco.Cms.Core.DependencyInjection;
     using Umbraco.Extensions;
+    using Umbraco_OpenIdConnect_Example.Core.Member;
 
     public class Startup
     {
@@ -34,11 +35,13 @@ namespace Umbraco_OpenIdConnect_Example.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddUmbraco(_env, _config)
-                .AddBackOffice()
-                .AddWebsite()
-                .AddComposers()
-                .AddOpenIdConnectAuthentication()
-                .Build();
+                 .AddBackOffice()
+        .AddWebsite()
+        .AddComposers()
+        .AddOpenIdConnectAuthentication()
+        .AddCustomMemberSignInManager()
+        .SetMemberManager<CustomMemberManager>()
+        .Build();
         }
 
         /// <summary>
