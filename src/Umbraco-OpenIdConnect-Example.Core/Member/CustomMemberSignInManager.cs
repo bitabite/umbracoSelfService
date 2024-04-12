@@ -12,6 +12,7 @@ using Umbraco.Cms.Core.Notifications;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Web.Common.Security;
 using Umbraco.Extensions;
+using Umbraco.Cms.Core.Models.Membership;
 
 namespace Umbraco_OpenIdConnect_Example.Core.Member;
 
@@ -74,6 +75,9 @@ public class CustomMemberSignInManager : MemberSignInManager
 
         // For now hard code the role. These could be claims from the external login provider.
         member.Claims.Add(new IdentityUserClaim<string>() { ClaimType = ClaimTypes.Role, ClaimValue = "example-group" });
+        //member.Claims.Add(new IdentityUserClaim<string>() { ClaimType = ClaimTypes.Name, ClaimValue = loginInfo.Principal.Claims.FirstOrDefault(s => s.Type == "mitid.identity_name")?.Value });
+        //member.Claims.Add(new IdentityUserClaim<string>() { ClaimType = ClaimTypes.Email, ClaimValue = loginInfo.Principal.Claims.FirstOrDefault(s => s.Type == "idp_identity_id")?.Value + "@anyone.dk" });
+
 
         return await SignInOrTwoFactorAsync(member, isPersistent, loginInfo.LoginProvider, bypassTwoFactor);
     }

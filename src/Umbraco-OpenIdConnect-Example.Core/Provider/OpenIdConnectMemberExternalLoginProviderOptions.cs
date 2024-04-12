@@ -62,8 +62,7 @@
                     // in the externalLogin info
                     user.UserName = loginInfo.Principal.Claims.FirstOrDefault(s => s.Type == "mitid.identity_name")?.Value;
                     user.Name = loginInfo.Principal.Claims.FirstOrDefault(s => s.Type == "mitid.identity_name")?.Value;
-
-
+       
                     return true; //returns a boolean indicating if sign in should continue or not.
                 }
             };

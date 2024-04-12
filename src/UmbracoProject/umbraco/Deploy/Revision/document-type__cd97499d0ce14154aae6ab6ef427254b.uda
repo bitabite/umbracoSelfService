@@ -1,19 +1,14 @@
 {
-  "Name": "SelfService",
-  "Alias": "selfService",
-  "DefaultTemplate": "umb://template/8431f3875d5a492c9013ee295ce753bc",
+  "Name": "SelfServicePage",
+  "Alias": "selfServicePage",
   "AllowedTemplates": [
     "umb://template/8431f3875d5a492c9013ee295ce753bc"
   ],
   "HistoryCleanup": {},
-  "Icon": "icon-badge color-pink",
+  "Icon": "icon-document color-pink",
   "Thumbnail": "folder.png",
   "Permissions": {
-    "AllowedChildContentTypes": [
-      "umb://document-type/b871f83c23954894be0f5422c1a71e48",
-      "umb://document-type/fe8e0004d9604823b1060b1f00f4201e",
-      "umb://document-type/cd97499d0ce14154aae6ab6ef427254b"
-    ]
+    "AllowedChildContentTypes": []
   },
   "Parent": "umb://document-type/b871f83c23954894be0f5422c1a71e48",
   "CompositionContentTypes": [
@@ -21,17 +16,11 @@
   ],
   "PropertyGroups": [],
   "PropertyTypes": [],
-  "Udi": "umb://document-type/fe8e0004d9604823b1060b1f00f4201e",
+  "Udi": "umb://document-type/cd97499d0ce14154aae6ab6ef427254b",
   "Dependencies": [
     {
       "Udi": "umb://document-type/b871f83c23954894be0f5422c1a71e48",
       "Ordering": true
-    },
-    {
-      "Udi": "umb://document-type/cd97499d0ce14154aae6ab6ef427254b"
-    },
-    {
-      "Udi": "umb://document-type/fe8e0004d9604823b1060b1f00f4201e"
     },
     {
       "Udi": "umb://template/8431f3875d5a492c9013ee295ce753bc",

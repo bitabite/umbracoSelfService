@@ -44,7 +44,7 @@
                 <div class="justify-end lg:flex text-sm py-2">
                     @if (isLoggedIn)
                     {
-                        <p class="pr-2">Hi <strong>@Context?.User?.Identity?.GetUserName()</strong>!&nbsp; </p> 
+                        <p class="pr-2">Hi <strong>@Context?.User?.Identity?.Name</strong>!&nbsp; </p> 
 
                         @* Umbraco comes with a default controller in UmbLoginStatusController which can be used to logout. *@
                         @* However that version can only be used if you want to logout from the website only. *@
