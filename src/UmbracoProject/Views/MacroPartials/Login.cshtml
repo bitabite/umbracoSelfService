@@ -14,10 +14,6 @@
     loginModel.RedirectUrl = null;
 }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
-
 
 @if (ViewData.TryGetTwoFactorProviderNames(out var providerNames))
 {
@@ -48,7 +44,7 @@ else
 <div class="login-form">
       
 
-    @using (Html.BeginUmbracoForm<UmbLoginController>(
+  @*   @using (Html.BeginUmbracoForm<UmbLoginController>(
         "HandleLogin", new { RedirectUrl = loginModel.RedirectUrl })) {
             <h4>Log in with a local account.</h4>
             <hr />
@@ -95,15 +91,14 @@ else
             </div>
         
         }
-     
+      *@
 @{
     var loginProviders = await memberExternalLoginProviders.GetMemberProvidersAsync();
     var externalSignInError = ViewData.GetExternalSignInProviderErrors();
 
     if (loginProviders.Any())
     {
-        <hr/>
-        <h4>Or using external providers</h4>
+
         if (externalSignInError?.AuthenticationType is null && externalSignInError?.Errors.Any() == true)
         {
             @Html.DisplayFor(x => externalSignInError.Errors);
@@ -114,8 +109,8 @@ else
 
             @using (Html.BeginUmbracoForm<UmbExternalLoginController>(nameof(UmbExternalLoginController.ExternalLogin)))
             {
-                <button type="submit" name="provider" value="@login.ExternalLoginProvider.AuthenticationType">
-                    Sign in with @login.AuthenticationScheme.DisplayName
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" name="provider" value="@login.ExternalLoginProvider.AuthenticationType">
+                    Sign in with MitID
                 </button>
 
                 if (externalSignInError?.AuthenticationType == login.ExternalLoginProvider.AuthenticationType)

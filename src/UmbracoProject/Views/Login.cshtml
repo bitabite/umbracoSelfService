@@ -9,8 +9,6 @@
 @using Umbraco.Cms.Web.Common.Models
 @using Umbraco.Cms.Web.Website.Controllers
 
-
-
 @{
     var isLoggedIn = Context.User?.Identity?.IsAuthenticated ?? false;
     var logoutModel = new PostRedirectModel();
@@ -22,14 +20,11 @@
     Layout = "master.cshtml";
 }
 
-@* @await Html.PartialAsync("~/Views/Partials/pageHeader.cshtml", new PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
+ @await Html.PartialAsync("~/Views/Partials/pageHeader.cshtml", new PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
 
- *@
-<section class="section">
-    <div class="container">
  
-        <div class="col-md-9">
-            <article>
+
+          
 
                 @if (isLoggedIn)
                 {
@@ -40,8 +35,4 @@
                 {
                     @await Umbraco.RenderMacroAsync("Login")
                 }
-            </article>
-        </div>
-    </div>
-
-</section>
+    

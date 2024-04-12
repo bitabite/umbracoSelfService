@@ -1,0 +1,19 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Content>
+
+@using Clean.Core.Models.ViewModels
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+
+@{
+    Layout = "master.cshtml";
+}
+
+<div class="relative flex is-overflowed ">
+    @await Html.CachedPartialAsync("~/Views/Partials/leftNavigation.cshtml", model: Model, cacheTimeout: TimeSpan.FromMinutes(60))
+
+    <div class="flex-1 flex flex-col px-4 py-2">
+        @await Html.PartialAsync("~/Views/Partials/pageHeader.cshtml", new PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
+        @Html.GetBlockListHtml(Model.ContentRows)
+    </div>
+
+</div>

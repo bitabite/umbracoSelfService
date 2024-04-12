@@ -1,9 +1,13 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 
-@using Microsoft.AspNetCore.Http.Extensions
 @using Umbraco.Cms.Web.Common.Models
+@using Umbraco.Cms.Web.Common.Security
 @using Umbraco.Cms.Web.Website.Controllers
+@using Umbraco.Cms.Core.Services
 @using Umbraco.Extensions
+
+@inject IMemberExternalLoginProviders memberExternalLoginProviders
+@inject ITwoFactorLoginService twoFactorLoginService
 
 @{
     var isLoggedIn = Context.User?.Identity?.IsAuthenticated ?? false;
@@ -27,4 +31,28 @@
         }
 
     </div>
+}
+else
+{
+    <span>here</span>
+
+    var loginProviders = await memberExternalLoginProviders.GetMemberProvidersAsync();
+    var externalSignInError = ViewData.GetExternalSignInProviderErrors();
+    
+    @foreach (var login in await memberExternalLoginProviders.GetMemberProvidersAsync())
+    {
+
+        @using (Html.BeginUmbracoForm<UmbExternalLoginController>(nameof(UmbExternalLoginController.ExternalLogin)))
+        {
+            <button type="submit" name="provider" value="@login.ExternalLoginProvider.AuthenticationType">
+                Sign in with @login.AuthenticationScheme.DisplayName
+            </button>
+
+            if (externalSignInError?.AuthenticationType == login.ExternalLoginProvider.AuthenticationType)
+            {
+                @Html.DisplayFor(x => externalSignInError.Errors)
+                
+            }
+        }
+    }
 }

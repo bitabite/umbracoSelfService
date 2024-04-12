@@ -47,8 +47,9 @@
                 // Optional callback
                 OnAutoLinking = (autoLinkUser, loginInfo) =>
                 {
-                    autoLinkUser.Email = loginInfo.Principal.Claims.FirstOrDefault(s => s.Type == "idp_identity_id")?.Value + "@sjkp.dk";
+                    autoLinkUser.Email = loginInfo.Principal.Claims.FirstOrDefault(s => s.Type == "idp_identity_id")?.Value + "@anyone.dk";
                     autoLinkUser.NormalizedUserName = loginInfo.Principal.Claims.FirstOrDefault(s => s.Type == "mitid.identity_name")?.Value;
+       
                     // You can customize the user before it's linked.
                     // i.e. Modify the user's groups based on the Claims returned
                     // in the externalLogin info
@@ -60,6 +61,8 @@
                     // i.e. Sync the user's name based on the Claims returned
                     // in the externalLogin info
                     user.UserName = loginInfo.Principal.Claims.FirstOrDefault(s => s.Type == "mitid.identity_name")?.Value;
+                    user.Name = loginInfo.Principal.Claims.FirstOrDefault(s => s.Type == "mitid.identity_name")?.Value;
+
 
                     return true; //returns a boolean indicating if sign in should continue or not.
                 }

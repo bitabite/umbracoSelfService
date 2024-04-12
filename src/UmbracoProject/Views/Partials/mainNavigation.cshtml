@@ -1,7 +1,22 @@
 ﻿@inherits UmbracoViewPage
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
 @using Umbraco.Cms.Web.Common.Models
+@using Umbraco.Cms.Web.Common.Security
+@using Umbraco.Cms.Web.Website.Controllers
+@using Umbraco.Cms.Core.Services
+@using Umbraco.Extensions
 
+
+@using Clean.Core.Models.ViewModels
+
+
+
+@using Microsoft.AspNetCore.Http.Extensions
+
+
+
+@inject IMemberExternalLoginProviders memberExternalLoginProviders
+@inject ITwoFactorLoginService twoFactorLoginService
 
 @{
     var homePage = Model.AncestorOrSelf<ContentModels.Home>();
@@ -9,13 +24,16 @@
     var logoutModel = new PostRedirectModel();
     // You can modify this to redirect to a different URL instead of the current one
     logoutModel.RedirectUrl = null;
-}
-<header class="bg-white fixed top-0 left-0 right-0 z-40 h-20 lg:h-30 print:bg-transparent print:relative">
 
+
+
+}
+<header class="bg-white fixed top-0 left-0 right-0 z-40 h-20 lg:h-20 print:bg-transparent print:relative border-y border-black border-b">
     <div class="container mx-auto">
+      
         <div class="relative border-x border-black flex is-overflowed">
-        <div class="flex-shrink-0 md:px-8 py-4 lg:px-8 lg:border-r border-black flex items-center print:px-0">
-        <h1 class="text-2xl mb-3"> <a class="navbar-brand" href="@homePage.Url()">@Umbraco.GetDictionaryValue("Navigation.SiteName")</a></h1>
+        <div class="flex-shrink-0 md:px-8 py-5 lg:px-8 lg:border-r border-black flex items-center print:px-0 h-20">
+                <h1 class="text-2xl "> <a class="navbar-brand" href="@homePage.Url()">@Umbraco.GetDictionaryValue("Navigation.SiteName")</a></h1>
         @*<button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">*@
     @*     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             @Umbraco.GetDictionaryValue("Navigation.MenuTitle")
@@ -23,23 +41,40 @@
         </button> *@
         </div>
         <div class="flex-1 flex flex-col items-end ">
-                <div class="p-2 justify-end lg:flex text-sm ">
+                <div class="justify-end lg:flex text-sm py-2">
                     @if (isLoggedIn)
                     {
-
-
-                        <p class="pr-2">Welcome back <strong>@Context?.User?.Identity?.Name</strong>!</p> 
+                        <p class="pr-2">Hi <strong>@Context?.User?.Identity?.GetUserName()</strong>!&nbsp; </p> 
 
                         @* Umbraco comes with a default controller in UmbLoginStatusController which can be used to logout. *@
                         @* However that version can only be used if you want to logout from the website only. *@
                         @* If you also want to logout at the external login provider a custom controller is needed. *@
                         @using (Html.BeginUmbracoForm<Umbraco_OpenIdConnect_Example.Core.Controllers.ExternalLogoutController>("HandleLogout", new { RedirectUrl = logoutModel.RedirectUrl }))
                         {
-
-                            <button type="submit" class="button sm">Log out</button>
+                            <button type="submit" class="button mr-6">Log out</button>
                         }
+                    }
+                    else
+                    {
+                        var loginProviders = await memberExternalLoginProviders.GetMemberProvidersAsync();
+                        var externalSignInError = ViewData.GetExternalSignInProviderErrors();
 
+                        @foreach (var login in await memberExternalLoginProviders.GetMemberProvidersAsync())
+                        {
 
+                            @using (Html.BeginUmbracoForm<UmbExternalLoginController>(nameof(UmbExternalLoginController.ExternalLogin)))
+                            {
+                                <button class="button mr-6" type="submit" name="provider" value="@login.ExternalLoginProvider.AuthenticationType">
+                                    Sign in with MitID
+                                </button>
+
+                                if (externalSignInError?.AuthenticationType == login.ExternalLoginProvider.AuthenticationType)
+                                {
+                                    @Html.DisplayFor(x => externalSignInError.Errors)
+
+                                }
+                            }
+                        }
                     }
                 </div>
             <ul class="flex pt-1">

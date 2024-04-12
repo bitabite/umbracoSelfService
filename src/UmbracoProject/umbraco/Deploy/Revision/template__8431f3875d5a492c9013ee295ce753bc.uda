@@ -1,0 +1,14 @@
+{
+  "Name": "SelfService",
+  "Alias": "SelfService",
+  "File": "umb://template-file/SelfService.cshtml",
+  "Udi": "umb://template/8431f3875d5a492c9013ee295ce753bc",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/SelfService.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.1.0"
+}
