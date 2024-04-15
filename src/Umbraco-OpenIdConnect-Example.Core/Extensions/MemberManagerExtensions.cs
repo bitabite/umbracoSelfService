@@ -12,7 +12,8 @@ public static class MemberManagerExtensions
         {
             Id = id,
             UserName = claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value,
-        };
+            Name = claims.FirstOrDefault(x => x.Type == "mitid.identity_name")?.Value
+    };
 
         foreach (var claim in claims)
         {

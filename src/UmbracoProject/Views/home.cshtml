@@ -24,13 +24,23 @@
 
 @await Html.PartialAsync("~/Views/Partials/pageHeader.cshtml", new PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
 
+<div class="px-6 py-4">
 @if (Model.ContentRows != null)
 {
    
-    <div class="px-4 py-2">
+ 
                     @Html.GetBlockListHtml(Model.ContentRows)
-                </div>
+              
    
 
 
 }
+
+<h2 class="lg py-4">Components</h2>
+    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+        Button
+    </button>
+
+</div>
+
+

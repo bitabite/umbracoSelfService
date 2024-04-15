@@ -71,7 +71,7 @@ public class CustomMemberSignInManager : MemberSignInManager
         // We just build a virtual member from the external login info.
         var claims = loginInfo.Principal.Claims;
         var id = claims.FirstOrDefault(x => x.Type == "sid")?.Value;
-        var member = _memberManager.CreateVirtualMember(id, loginInfo.Principal.Claims);
+        var member = _memberManager.CreateVirtualMember(id, claims);
 
         // For now hard code the role. These could be claims from the external login provider.
         member.Claims.Add(new IdentityUserClaim<string>() { ClaimType = ClaimTypes.Role, ClaimValue = "example-group" });

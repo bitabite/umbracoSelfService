@@ -1,22 +1,18 @@
 ﻿@inherits UmbracoViewPage
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Security
 @using Umbraco.Cms.Web.Common.Models
 @using Umbraco.Cms.Web.Common.Security
 @using Umbraco.Cms.Web.Website.Controllers
 @using Umbraco.Cms.Core.Services
 @using Umbraco.Extensions
-
-
 @using Clean.Core.Models.ViewModels
-
-
-
 @using Microsoft.AspNetCore.Http.Extensions
-
-
 
 @inject IMemberExternalLoginProviders memberExternalLoginProviders
 @inject ITwoFactorLoginService twoFactorLoginService
+@inject IMemberManager MemberManager
+@inject IMemberService MemberService
 
 @{
     var homePage = Model.AncestorOrSelf<ContentModels.Home>();
@@ -24,10 +20,8 @@
     var logoutModel = new PostRedirectModel();
     // You can modify this to redirect to a different URL instead of the current one
     logoutModel.RedirectUrl = null;
-
-
-
 }
+
 <header class="bg-white fixed top-0 left-0 right-0 z-40 h-20 lg:h-20 print:bg-transparent print:relative border-y border-black border-b">
     <div class="container mx-auto">
       
@@ -44,7 +38,8 @@
                 <div class="justify-end lg:flex text-sm py-2">
                     @if (isLoggedIn)
                     {
-                        <p class="pr-2">Hi <strong>@Context?.User?.Identity?.Name</strong>!&nbsp; </p> 
+                        var currUser = MemberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
+                        <p class="pr-2">Hi <strong>@currUser?.Name</strong>!&nbsp; </p>
 
                         @* Umbraco comes with a default controller in UmbLoginStatusController which can be used to logout. *@
                         @* However that version can only be used if you want to logout from the website only. *@
