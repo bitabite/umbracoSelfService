@@ -1,11 +1,7 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
-
 @using Umbraco.Extensions
-
 @using Clean.Core.Models.ViewModels
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
-
-
 @using Microsoft.AspNetCore.Http.Extensions
 @using Umbraco.Cms.Web.Common.Models
 @using Umbraco.Cms.Web.Website.Controllers
@@ -20,57 +16,39 @@
 @{
     Layout = "master.cshtml";
 }
-
-
 @await Html.PartialAsync("~/Views/Partials/pageHeader.cshtml", new PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
 
 <div class="px-6 py-4">
-@if (Model.ContentRows != null)
-{
-   
- 
-                    @Html.GetBlockListHtml(Model.ContentRows)
-              
-   
+    @if (Model.ContentRows != null)
+    {
+        @Html.GetBlockListHtml(Model.ContentRows)
+    }
+    <h2 class="lg py-4">Components</h2>
+    <input class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" id="refresh-button" type="button" value="button" name="Name" />
 
-
-}
-
-
-        <script>
-            $(document).ready(function () {
-                 $('#viewallfollowers').click(function () {
-                     {
-                    $("#component-1").empty();
-                    var _url = '@Url.Action("Products", "Home")';
-                         $.ajax({
-                             type: "GET",
-                             url: _url,
-                             data: { uid: $(this).prop("name") },
-                             success: function (result) {
-                            $("#component-1").html(result);
-                             },
-                         });
-                     }
-                 });
-             });
-        </script>
-    
-
-<h2 class="lg py-4">Components</h2>
-    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-        Button
-    </button>
-
-    <input id="viewallfollowers" type="button" value="button" name="Name" />
-
-
-    <div id="component-1">
-
-       
-
-    @await Component.InvokeAsync("Products")
+    <div id="product-list">
+        @await Component.InvokeAsync("Products")
     </div>
+
+    <script>
+        function refreshProductList() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        console.log('Fetching data');
+                        document.getElementById('product-list').innerHTML = "<h1>new data</h1>" + xhr.responseText;
+                    } else {
+                        console.error('Error refreshing product list:', xhr.status);
+                    }
+                }
+            };
+            xhr.open('GET', '/Products'); // Endpoint to fetch updated product list
+            xhr.send();
+        }
+        // Bind refresh function to button click event
+        document.getElementById('refresh-button').addEventListener('click', refreshProductList);
+    </script>
 </div>
 
 
