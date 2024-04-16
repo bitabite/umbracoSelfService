@@ -1,0 +1,10 @@
+﻿@model List<Product>
+
+
+
+<ul>
+    @foreach (var product in Model)
+    {
+        <li>@product.title - @product.price</li>
+    }
+</ul>

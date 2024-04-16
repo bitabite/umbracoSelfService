@@ -36,11 +36,41 @@
 
 }
 
+
+        <script>
+            $(document).ready(function () {
+                 $('#viewallfollowers').click(function () {
+                     {
+                    $("#component-1").empty();
+                    var _url = '@Url.Action("Products", "Home")';
+                         $.ajax({
+                             type: "GET",
+                             url: _url,
+                             data: { uid: $(this).prop("name") },
+                             success: function (result) {
+                            $("#component-1").html(result);
+                             },
+                         });
+                     }
+                 });
+             });
+        </script>
+    
+
 <h2 class="lg py-4">Components</h2>
     <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
         Button
     </button>
 
+    <input id="viewallfollowers" type="button" value="button" name="Name" />
+
+
+    <div id="component-1">
+
+       
+
+    @await Component.InvokeAsync("Products")
+    </div>
 </div>
 
 

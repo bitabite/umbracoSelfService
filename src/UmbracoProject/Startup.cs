@@ -5,6 +5,7 @@ namespace Umbraco_OpenIdConnect_Example.Web
     using Umbraco.Extensions;
     using Umbraco_OpenIdConnect_Example.Core.Member;
 
+
     public class Startup
     {
         private readonly IWebHostEnvironment _env;
@@ -42,6 +43,7 @@ namespace Umbraco_OpenIdConnect_Example.Web
         .AddCustomMemberSignInManager()
         .SetMemberManager<CustomMemberManager>()
         .Build();
+
         }
 
         /// <summary>
@@ -68,6 +70,19 @@ namespace Umbraco_OpenIdConnect_Example.Web
                     u.UseBackOfficeEndpoints();
                     u.UseWebsiteEndpoints();
                 });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                // Define a route for your ViewComponent
+                endpoints.MapControllerRoute(
+                    name: "viewcomponent",
+                    pattern: "YourControllerName/{action=Index}/{id?}",
+                    defaults: new { controller = "YourControllerName" });
+            });
         }
     }
 }
